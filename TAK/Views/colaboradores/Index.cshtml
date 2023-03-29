@@ -1,0 +1,90 @@
+﻿@model IEnumerable<TAK.Models.colaboradores>
+
+@{
+    ViewBag.Title = "Index";
+    Layout = "~/Views/Shared/_Layout.cshtml";
+}
+
+<h2>Colaboradores</h2>
+
+<p>
+    @Html.ActionLink("Create New", "Create", null, new { @class = "btn btn-success" })
+</p>
+<table class="table">
+    <tr>
+        <th>
+            ID
+        </th>
+        <th>
+            Nombres
+        </th>
+        <th>
+            Apellidos
+        </th>
+        <th>
+            Fecha Nacimiento
+        </th>
+        <th>
+            Estado Civil
+        </th>
+        <th>
+            Grado Academico
+        </th>
+        <th>
+            Direccion
+        </th>
+        <th></th>
+    </tr>
+
+@foreach (var item in Model) {
+<tr>
+    <td>
+        @Html.DisplayFor(modelItem => item.id)
+    </td>
+    <td>
+        @Html.DisplayFor(modelItem => item.nombres)
+    </td>
+    <td>
+        @Html.DisplayFor(modelItem => item.apellidos)
+    </td>
+    <td>
+        @Html.DisplayFor(modelItem => item.fecha_nacimiento)
+    </td>
+    <td>
+        @Html.DisplayFor(modelItem => item.estado_civil)
+    </td>
+    <td>
+        @Html.DisplayFor(modelItem => item.grado_academico)
+    </td>
+    <td>
+        @Html.DisplayFor(modelItem => item.direccion)
+    </td> 
+    <td>
+        <a href="@Url.Action("Edit", new { id = item.id })" class="btn btn-primary">
+            <i class="fa fa-edit"></i> 
+        </a>
+
+        <a href="@Url.Action("Details", new { id = item.id })" class="btn btn-info">
+            <i class="fa fa-info-circle"></i> 
+        </a>
+
+        <a href="@Url.Action("Delete", new { id = item.id })" class="btn btn-danger">
+            <i class="fa fa-trash"></i> 
+        </a>
+    </td>
+</tr>
+}
+
+</table> 
+
+<div>
+    @using (Html.BeginForm("GetJson", "colaboradores", FormMethod.Get))
+    {
+        <p>
+            <label for="id">ID:</label>
+            @Html.TextBox("id", null, new { type = "number", min = "1", required = "required" })
+            <input type="submit" value="Get JSON" class="btn-success" />
+        </p>
+    }
+
+</div>
